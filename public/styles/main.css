@@ -1,0 +1,93 @@
+body {
+    padding-top: 50px;
+    background-color: rgb(18, 18, 18);
+    color: rgb(255, 255, 255);
+}
+
+canvas {
+    width: 350px;
+    height: 350px;
+    background-color: rgb(30, 30, 30);
+    border-color: rgb(51, 51, 51);
+}
+
+input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    border: none;
+    font: italic normal 12px monospace;
+    width: 200px;
+    background-color: rgb(51, 51, 51);
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(85, 85, 85);
+}
+
+.light-mode-icon {
+    position: fixed;
+    top: 20px; right: 30px;
+    transition: all 0.15s ease;
+    cursor: pointer;
+    filter: invert(1);
+}
+
+.light-mode-icon:hover {  opacity: 0.8; }
+.light-mode-icon:active { opacity: 1; }
+
+.title-txt { 
+    font-size: 20px; 
+}
+
+/* containers/divs */
+.title-container {
+    display: grid;
+    place-content: center;
+    margin-bottom: 20px;
+}
+
+.board-container {
+    display: grid;
+    place-content: center;
+    margin-bottom: 50px;
+}
+
+.input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+/* light-mode */
+ body.light-mode {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+}
+
+body.light-mode canvas {
+    background-color: rgb(245, 245, 245);
+}
+
+body.light-mode input { 
+    background-color: rgb(245, 245, 245);
+    border: 1px solid rgb(228, 228, 228);
+    color: rgb(0, 0, 0);
+}
+
+body.light-mode .light-mode-icon {
+     filter: invert(0);
+}
+
+/* responsive design */
+@media (max-width: 600px) {
+
+    #board {
+        width: 300px;
+        height: 300px;
+    }      
+
+    .title-container {
+        margin-top: 50px;
+    }    
+}
+

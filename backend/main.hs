@@ -22,10 +22,16 @@ genPoints n = replicateM n randomPoint
 main :: IO ()
 main = scotty 3001 $ do
     get "/" $ do
-        file "index.html"
+        file "public/index.html"
 
-    get "/images/lightMode-icon.png" $ do
-        file "images/lightMode-icon.png"
+    get "/styles/main.css" $ do
+        file "public/styles/main.css"
+
+    get "/scripts/main.js" $ do
+        file "public/scripts/main.js"
+
+    get "/images/light-mode.png" $ do
+        file "public/images/light-mode.png"
 
     get "/points" $ do
         n <- param "n"
