@@ -8,15 +8,17 @@ themeIcon.addEventListener("click", () => {
     body.classList.toggle("light-mode");
 });
 
+
+
 function rodarSimulacao() {
     const n = parseInt(pointInput.value);
-
+    
     fetch("/points?n=" + n)
-        .then(response => response.json())
-        .then(data => {
-            const ctx = board.getContext("2d");
-            ctx.clearRect(0, 0, 400, 400); // Limpa a tela anterior
-            
+    .then(response => response.json())
+    .then(data => {
+                const ctx = board.getContext("2d");
+                ctx.clearRect(0, 0, 400, 400); // Limpa a tela anterior
+        
                 const isLight = document.body.classList.contains("light-mode");
                 const corDentro = isLight ? "blue" : "aqua";
                 const corFora   = isLight ? "red" : "red";
@@ -42,9 +44,18 @@ function rodarSimulacao() {
             });
         });
     }
-
+    
     pointInput.addEventListener('keydown', (event) => {
+        
         if (event.key === "Enter") { 
-            rodarSimulacao(); 
+            if (pointInput.value.length < 7) {
+                rodarSimulacao(); 
+            }  else {
+                alert("Number of digits can not be higher than 6!");
+                pointInput.value = pointInput.value.slice(0, 6);
+            } 
         }
     });
+
+
+ 

@@ -34,6 +34,6 @@ main = scotty 3001 $ do
         file "public/images/light-mode.png"
 
     get "/points" $ do
-        n <- param "n"
-        points <- liftAndCatchIO (genPoints n)
+        n <- queryParam "n"
+        points <- liftIO (genPoints n)
         json points
