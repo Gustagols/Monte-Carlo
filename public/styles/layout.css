@@ -1,0 +1,22 @@
+/* 2 - Containers -> caixas (divs) "invisíveis" que "seguram" as coisas */
+
+.title-container {
+    display: grid;
+    place-content: center;
+    margin-bottom: 20px;
+}
+
+.board-container {
+    display: grid;
+    place-content: center;
+    margin-bottom: 50px;
+    position: relative; 
+    width: fit-content; 
+    margin: 0 auto 50px auto;
+}
+
+.input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

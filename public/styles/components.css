@@ -1,0 +1,97 @@
+/* 3 - Componentes (canvas, input, button...) */
+
+/* --- Canvas --- */
+canvas {
+    width: 350px;
+    height: 350px;
+    background-color: rgb(30, 30, 30);
+    border-color: rgb(51, 51, 51);
+}
+
+/* --- Loader e Animação --- */
+#loader {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    z-index: 10;
+}
+
+.line {
+    height: 4px;            
+    background-color: white;
+    box-shadow: 0 0 8px rgba(255, 255, 0, 0.5);
+    border-radius: 2px;
+    animation: growLine 0.8s ease-out infinite;
+    max-width: 80%;
+}
+
+@keyframes growLine {
+    0% { width: 30%; opacity: 0.6; }
+    100% { width: 100%; opacity: 1; }
+}
+
+/* --- Inputs e Botões --- */
+input, button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    font: italic normal 12px monospace;
+    width: 230px;
+    background-color: rgb(51, 51, 51);
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(85, 85, 85);
+    border-radius: 10px 0px 0px 0px;
+    outline-width: 0;
+}
+
+button {
+    font-style: normal;
+    font-weight: bold;
+    max-width: 100px;
+    transition: 0.15s ease;
+    border-radius: 0px 10px 0px 0px;
+    cursor: pointer;
+}
+
+button:hover { filter: brightness(0.9); }
+button:active { filter: brightness(1); }
+
+/* --- Resultado PI --- */
+.result-container {
+    display: flex;
+    justify-content: start;
+    align-items: center;    
+    border-radius: 0px 0px 10px 10px;
+    padding-left: 12px;
+    font: italic normal 16px monospace;
+    margin: 0px auto 50px auto;
+    width: 334px; height: 30px;
+    background-color: rgb(30, 30, 30);
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(85, 85, 85);
+    border-top: none;
+}
+
+#pi-value {
+    color: white;
+    font: normal normal 12px monospace;
+}
+
+/* --- Ícone --- */
+.light-mode-icon {
+    position: fixed;
+    top: 20px; right: 30px;
+    transition: all 0.15s ease;
+    cursor: pointer;
+    filter: invert(1);
+}
+.light-mode-icon:hover {  opacity: 0.8; }
+.light-mode-icon:active { opacity: 1; }

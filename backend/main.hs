@@ -24,16 +24,19 @@ main = scotty 3001 $ do
     get "/" $ do
         file "public/index.html"
 
-    get "/styles/main.css" $ do
+    get "/styles/:filename" $ do
+        filename <- pathParam "filename"
         setHeader "Content-Type" "text/css"
-        file "public/styles/main.css"
+        file $ "public/styles/" ++ filename
 
-    get "/scripts/main.js" $ do
-        setHeader "Content-Type" "application/javascript"
-        file "public/scripts/main.js"
+    get "/scripts/:filename" $ do
+         filename <- pathParam "filename"
+         setHeader "Content-Type" "application/javascript"
+         file $ "public/scripts/" ++ filename
 
-    get "/images/light-mode.png" $ do
-        file "public/images/light-mode.png"
+    get "/images/icons/:filename" $ do
+        filename <- pathParam "filename"
+        file $ "public/images/icons/" ++ filename
 
     get "/points" $ do
         n <- queryParam "n"

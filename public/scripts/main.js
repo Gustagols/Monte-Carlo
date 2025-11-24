@@ -1,77 +1,70 @@
-const board = document.getElementById("board");   
-const sendBttn = document.getElementById("send-bttn");
+import { getValidNumber } from "./input-validation.js";
+import { getThemeColors } from "./light-mode.js";
+
+const board = document.getElementById("board");
 const pointInput = document.getElementById("points-input");
+const sendBttn = document.getElementById("send-bttn");
 const loader = document.getElementById("loader");
 const piValue = document.getElementById("pi-value");
-        
-const body = document.body;
-const themeIcon = document.querySelector(".light-mode-icon");
 
-themeIcon.addEventListener("click", () => { body.classList.toggle("light-mode"); });
+function runSimulation() {
 
-    function rodarSimulacao() {
+    let rawN = parseInt(pointInput.value);
+    const n = getValidNumber(rawN, pointInput); // getValidNumber recebe dois parâmetros na construção, um valor e um elemento
+ 
+    if (n <= 0) return; // se o input for 0 ou menor que 0, não executa a função.
 
-    const n = parseInt(pointInput.value);
-    loader.classList.remove("hidden");
-
-    piValue.innerText = "...";
+    loader.classList.remove("hidden"); // aciona a animação de loading
+    piValue.innerText = "..."; // enquanto a simulação estiver processando, o valor de pi está sendo calculado ...
 
     fetch("/points?n=" + n)
-    .then(response => response.json())
-    .then(data => {
-                const ctx = board.getContext("2d");
-                ctx.clearRect(0, 0, 400, 400); // Limpa a tela anterior
-        
-                const isLight = document.body.classList.contains("light-mode");
-                const corDentro = isLight ? "blue" : "aqua";
-                const corFora   = isLight ? "red" : "red";
+        .then(response => response.json())
+        .then(data => {
+            const ctx = board.getContext("2d");
+            ctx.clearRect(0, 0, 400, 400); // Limpa a tela anterior
 
-                let insideCount = 0;
+            let insideCount = 0;
+            const colors = getThemeColors();
 
             data.forEach(point => {
                 // 1. Coordenadas para o Desenho (Pixels 0-400)
                 const x = (point[0] + 1) * 200;
                 const y = (point[1] + 1) * 200;
-
                 // 2. Coordenadas para a Matemática (Valores -1 a 1)
                 const xPoint = point[0] * point[0];
                 const yPoint = point[1] * point[1];
-
+                // 3. Decide cor
                 if (xPoint + yPoint > 1) {
-                    ctx.fillStyle = corFora;
+                    ctx.fillStyle = colors.outside;
                 } else {
-                    ctx.fillStyle = corDentro;
+                    ctx.fillStyle = colors.inside;
                     insideCount++;
                 }
-
+                // 4. Cria o gráfico
                 ctx.fillRect(x, y, 2, 2);
             });
+                // 5. Calcula o valor de pi
                 const piEstimado = 4 * (insideCount / n);
-                piValue.innerText = piEstimado.toFixed(4);
+                piValue.innerText = piEstimado.toFixed(4); // <-- printa na tela
         })
         .catch(error => {
             console.error("Erro:", error);
-            alert("Erro ao buscar dados da simulação.");
+            alert("Erro ao buscar dados da simulação."); // <-- em caso de erro de busca
         })
         .finally(() => {
-            loader.classList.add("hidden");
+            loader.classList.add("hidden"); // a animação de loading volta a ficar apagada assim que a simulação é executada
         });
+}
+
+// 6. Event listener - Input
+pointInput.addEventListener('keydown', (event) => { 
+    if (event.key === "Enter") { 
+        runSimulation(); 
     }
-    
-     function inputValidation () {
-         if (pointInput.value <= 100000) {
-                rodarSimulacao();  
-            }  else {
-                alert("Number of points can not be higher than 100.000!");
-                pointInput.value = 100000;
-            }    
-        }
+});
 
-    
-     pointInput.addEventListener('keydown', (event) => { 
-         if (event.key === "Enter") { inputValidation(); }});
+// 7. Event listener - Button
+sendBttn.addEventListener('click', () => { 
+    runSimulation(); 
+});
 
-     sendBttn.addEventListener('click', () => { inputValidation(); });
-
-
- 

@@ -1,0 +1,16 @@
+/* 1 - Estilo global do body */
+
+body {
+    padding-top: 50px;
+    background-color: rgb(18, 18, 18);
+    color: rgb(255, 255, 255);
+}
+
+.title-txt { 
+    font-size: 20px; 
+}
+
+.pi-sign { font-size: 29px; }
+.math-sign { font-size: 20px; }
+
+.hidden { display: none !important; }
