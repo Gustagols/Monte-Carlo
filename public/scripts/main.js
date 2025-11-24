@@ -1,5 +1,6 @@
 const pointInput = document.getElementById("points-input");
 const board = document.getElementById("board");   
+const loader = document.getElementById("loader");
         
 const themeIcon = document.querySelector(".light-mode-icon");
 const body = document.body;
@@ -8,11 +9,10 @@ themeIcon.addEventListener("click", () => {
     body.classList.toggle("light-mode");
 });
 
-
-
 function rodarSimulacao() {
     const n = parseInt(pointInput.value);
-    
+    loader.classList.remove("hidden");
+
     fetch("/points?n=" + n)
     .then(response => response.json())
     .then(data => {
@@ -32,30 +32,37 @@ function rodarSimulacao() {
                 const xPoint = point[0] * point[0];
                 const yPoint = point[1] * point[1];
 
-                // 3. Decide a cor
                 if (xPoint + yPoint > 1) {
                     ctx.fillStyle = corFora;
                 } else {
                     ctx.fillStyle = corDentro;
                 }
 
-                // 4. Desenha
                 ctx.fillRect(x, y, 2, 2);
             });
+                loader.classList.add("hidden");
+        })
+        .catch(error => {
+            console.error("Erro:", error);
+            alert("Erro ao buscar dados da simulação.");
+        })
+        .finally(() => {
+            loader.classList.add("hidden");
         });
     }
     
     pointInput.addEventListener('keydown', (event) => {
         
         if (event.key === "Enter") { 
-            if (pointInput.value.length < 7) {
+            if (pointInput.value <= 100000) {
                 rodarSimulacao(); 
             }  else {
-                alert("Number of digits can not be higher than 6!");
-                pointInput.value = pointInput.value.slice(0, 6);
+                alert("Number of points can not be higher than 100.000!");
+                pointInput.value = 100000;
             } 
         }
     });
+
 
 
  

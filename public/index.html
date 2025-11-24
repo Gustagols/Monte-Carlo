@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/main.css">
-    <script src="scripts/main.js" defer></script>
+    <link rel="stylesheet" href="styles/main.css?v=1.1">
+    <script src="scripts/main.js?v=1.1" defer></script>
     <title>monte-carlo</title>
 </head>
 
@@ -17,6 +17,9 @@
     </div>
     <div class="board-container">
         <canvas id="board" width="400" height="400"></canvas>
+            <div id="loader" class="hidden"> 
+                   <div class="line"></div>               
+            </div>
     </div>
     <div class="input-container">
         <input id="points-input" type="number"
