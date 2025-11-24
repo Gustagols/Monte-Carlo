@@ -49,17 +49,37 @@ canvas {
     display: none !important;
 }
 
-input {
+
+
+input, button {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 8px;
-    border: none;
     font: italic normal 12px monospace;
-    width: 200px;
+    width: 230px;
     background-color: rgb(51, 51, 51);
     color: rgb(255, 255, 255);
     border: 1px solid rgb(85, 85, 85);
+    border-radius: 10px 0px 0px 0px;
+    outline-width: 0;
+}
+
+button {
+    font-style: normal;
+    font-weight: bold;
+    max-width: 100px;
+    transition: 0.15s ease;
+    border-radius: 0px 10px 0px 0px;
+    cursor: pointer;
+}
+
+button:hover { filter: brightness(0.9); }
+button:active { filter: brightness(1); }
+
+#pi-value {
+    color: white;
+    font: normal normal 12px monospace;
 }
 
 .light-mode-icon {
@@ -93,6 +113,29 @@ input {
     margin: 0 auto 50px auto; /* Centraliza na página */
 }
 
+.result-container {
+    display: flex;
+    justify-content: start;
+    align-items: center;    
+    border-radius: 0px 0px 10px 10px;
+    padding-left: 12px;
+    font: italic normal 16px monospace;
+    margin: 0px auto 50px auto;
+    width: 334px; height: 30px;
+    background-color: rgb(30, 30, 30);
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(85, 85, 85);
+    border-top: none;
+}
+
+.pi-sign {
+    font-size: 29px;
+}
+
+.math-sign {
+    font-size: 20px;
+}
+
 .input-container {
     display: flex;
     justify-content: center;
@@ -118,10 +161,21 @@ body.light-mode .line {
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
 }
 
-body.light-mode input { 
+body.light-mode input,
+body.light-mode button { 
     background-color: rgb(245, 245, 245);
     border: 1px solid rgb(228, 228, 228);
     color: rgb(0, 0, 0);
+}
+
+body.light-mode .result-container {
+    background-color: rgba(223, 218, 218, 0.4);
+    border: 1px solid rgb(228, 228, 228);
+    color: black;
+}
+
+body.light-mode #pi-value {
+    color: black;
 }
 
 body.light-mode .light-mode-icon {
@@ -139,5 +193,17 @@ body.light-mode .light-mode-icon {
     .title-container {
         margin-top: 50px;
     }    
+
+    input {
+        width: 200px;
+    }
+
+    button {
+        width: 80px;
+    }
+
+    .result-container {
+        width: 284px;
+    }
 }
 

@@ -25,9 +25,11 @@ main = scotty 3001 $ do
         file "public/index.html"
 
     get "/styles/main.css" $ do
+        setHeader "Content-Type" "text/css"
         file "public/styles/main.css"
 
     get "/scripts/main.js" $ do
+        setHeader "Content-Type" "application/javascript"
         file "public/scripts/main.js"
 
     get "/images/light-mode.png" $ do
